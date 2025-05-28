@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "L78DRjq2//YXHtdLI1jw7PbxuwYOUL9YIPXztsrYbGM=",
+  "Source": "chess_backend",
+  "BasePath": "_content/chess_backend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
