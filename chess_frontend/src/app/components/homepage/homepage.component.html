@@ -1,0 +1,58 @@
+<div class="home">
+  <h1 class="home__title">Online&nbsp;Šah</h1>
+
+  <section *ngIf="!isLoggedIn" class="home__auth">
+    <button class="btn" (click)="onLogin()">Prijava</button>
+    <button class="btn btn--ghost" (click)="onRegister()">Registracija</button>
+  </section>
+
+  <section *ngIf="isLoggedIn" class="home__dashboard">
+
+    <article class="profile">
+      <img [src]="profilePicturePath"
+           alt="Profilna slika korisnika"
+           class="profile__img"/>
+
+      <h2 class="profile__name">Pozdrav, {{ userProfile!.username }}</h2>
+    </article>
+
+    <article class="actions">
+      <button class="btn" (click)="openCreate()">Stvori partiju</button>
+      <button class="btn btn--ghost" (click)="openJoin()">Pridruži se partiji</button>
+    </article>
+  </section>
+
+  <div class="popup" *ngIf="createGamePopup">
+    <div class="popup__card">
+      <h2 class="popup__title">Nova partija</h2>
+
+      <div class="popup__content">
+        <p class="popup__label">ID partije:</p>
+        <p class="popup__code">{{ gameCode }}</p>
+        <p class="popup__hint">Podijeli ovaj ID s protivnikom</p>
+      </div>
+
+      <button class="popup__close" (click)="close()">✕</button>
+    </div>
+  </div>
+
+  <div class="popup" *ngIf="joinGamePopup">
+    <div class="popup__card">
+
+      <h2 class="popup__title">Pridruži se partiji</h2>
+
+      <form (submit)="onJoinGame()" class="popup__content">
+        <label for="gameId" class="popup__label">ID partije</label>
+        <input id="gameId"
+              type="text"
+              [(ngModel)]="gameCode"
+              name="gameId"
+              class="popup__input"
+              required/>
+        <button type="submit" class="btn">Pridruži se</button>
+      </form>
+
+      <button class="popup__close" (click)="close()">✕</button>
+    </div>
+    </div>
+</div>

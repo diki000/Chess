@@ -1,0 +1,7 @@
+<div class="chess-board-wrapper" *ngIf="isGameReady">
+    <div class="loading" *ngIf="!bothPlayersReady">
+        <div class="loading-text">Čekamo na drugog igrača...</div>
+        <app-spinner class="spinner"></app-spinner>
+    </div>
+    <app-chess-board *ngIf="gameCode" [board]="(board$ | async) ?? []" [currentPlayer]="playerColor" [gameCode]="gameCode" (boardChange)="updateBoard($event)" (newMove)="handleMove($event)"></app-chess-board>
+</div>

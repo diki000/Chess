@@ -1,0 +1,13 @@
+<div class = "background">
+    <div class = "container">
+        <div class = "login" (keyup.enter)="loginButton()" >
+            <div class="piece">
+                <img src="../../../assets/piece.png" alt="piece" class="piece">
+            </div>
+            <h1 class = "title"> Prijavite se </h1>
+            <input type="text" class = "input" [(ngModel)]="username" placeholder="Korisničko ime"> 
+            <input type="password" class = "input" [(ngModel)]="password" placeholder="Lozinka"> 
+            <button class="button" (click)="loginButton()">Prijavite se</button>
+        </div>
+    </div>
+</div>

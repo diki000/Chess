@@ -1,0 +1,22 @@
+<div class = "background">
+    <div class = "container">
+        <div class = "register" (keyup.enter)="registerButton()" >
+            <div class="piece">
+                <img src="../../../assets/piece.png" alt="piece" class="piece">
+            </div>
+            <h1 class = "title"> Registriraj se </h1>
+            <input type="text" class = "input" [(ngModel)]="username" placeholder="Korisničko ime"> 
+            <input type="password" class = "input" [(ngModel)]="password" placeholder="Lozinka">
+            <input type="password" class = "input" [(ngModel)]="passwordRepeat" placeholder="Ponovite lozinku">
+            <label class="file-input custom-file-label">
+                {{profilePicture ? profilePicture.name : 'Dodajte profilnu sliku'}}
+                <input
+                  type="file"
+                  class="custom-file-input"
+                  (change)="onFileSelected($event)"
+                />
+              </label>
+            <button class="button" (click)="registerButton()">Registriraj se</button>
+        </div>
+    </div>
+</div>

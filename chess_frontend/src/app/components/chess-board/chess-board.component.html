@@ -1,0 +1,55 @@
+<div class="player-bar player-bar--top">
+  
+  <img *ngIf="bothPlayersReady" [src]="opponentPicture" alt="slika suparnika" class="player-bar__img">
+  <span *ngIf="bothPlayersReady"class="player-bar__name">{{ opponentName }}</span>
+</div>
+<div class="promotion-options" [ngClass]="{'invisible': !myPromotion}">
+  <div *ngFor="let piece of promotionOptions" class="promotion-option"(click)="onPromotionOptionClick(piece)">
+    <img [src]="'assets/pieces/' + piece + '-' + currentPlayer + '.svg'" [alt]="piece">
+  </div>
+</div>
+<div class="chess-board" [style.backgroundImage]="'url(assets/boards/basic.svg)'" [class.black-view]="currentPlayer === 'b'">
+  <div *ngFor="let row of board; let rowIndex = index" class="row">
+    <div 
+    *ngFor="let cell of row; let colIndex = index"
+    class="cell"
+    [ngClass]="{
+      'dark': (rowIndex + colIndex) % 2 !== 0,
+      'light': (rowIndex + colIndex) % 2 === 0
+    }"
+    (dragover)="onDragOver($event, rowIndex, colIndex)"
+    (drop)="onDrop($event, rowIndex, colIndex)"
+    (click)="onCellClick(rowIndex, colIndex)"
+  >
+    <span class="move-dot" *ngIf="isDragHighlighted(rowIndex, colIndex) || isHighlighted(rowIndex, colIndex)"></span>
+    <img 
+      *ngIf="cell"
+      [src]="'assets/pieces/' + cell.type + '-' + cell.color + '.svg'"
+      draggable="true"
+      (dragstart)="onDragStart($event, rowIndex, colIndex)"
+      (dragend)="onDragEnd($event)"
+      class="chess-piece"
+    >
+    </div>
+  </div>
+</div>
+<div class="promotion-options" [ngClass]="{'invisible': !opponentPromotion}">
+  <div *ngFor="let piece of promotionOptions" class="promotion-option"(click)="onPromotionOptionClick(piece)">
+    <img [src]="'assets/pieces/' + piece + '-' + currentPlayer + '.svg'" [alt]="piece">
+  </div>
+</div>
+<div class="player-bar player-bar--bottom">
+  <img [src]="myPicture" alt="moja slika" class="player-bar__img">
+  <span class="player-bar__name">{{ myName }}</span>
+</div>
+<div class="game-over-popup" *ngIf="gameFinished">
+  <div class="game-over__card">
+    <h2 *ngIf="gameWinnerId === 0">Partija je završila neriješeno</h2>
+    <h2 *ngIf="gameWinnerId !== 0">
+      {{ gameWinnerId === (userService.getUserProfile()?.userId) 
+          ? 'Pobijedili ste!' 
+          : 'Izgubili ste…' }}
+    </h2>
+    <button class="btn" (click)="onCloseGameOver()">Završi</button>
+  </div>
+</div>
